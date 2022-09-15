@@ -129,77 +129,12 @@ async def funfact(ctx):
 async def test(ctx):
 	await ctx.respond("tjestjdsklfjasdklf")
 
-#calculator
-@client.bridge_command(description = 'calculate stuff or something')
-async def calculate(ctx, x,*,y):
-	class Add(discord.ui.View): #Add
-		@discord.ui.button(label = "+", row = 0, style = discord.ButtonStyle.primary)
-		async def button_callback(self, button, interaction):
-			try:
-				answer = int(x) + int(y)
-				await interaction.response.send_message(f"{x}+{y} = {answer}")
-				for child in self.children:
-					child.disabled = True
-				await ctx.edit(view = self) #note to self, do ctx.edit. it works better
-			except:
-				await ctx.respond("Put actual integers")
-				button.disabled = True
-				for child in self.children:
-					child.disabled = True
-				await ctx.edit(view = self)
-
-			
-		
-		@discord.ui.button(label = "-", row = 0, style = discord.ButtonStyle.primary)
-		async def second_button_callback(self, button, interaction):
-			try:
-				answer = int(x) - int(y)
-				await interaction.response.send_message(f"{x}-{y} = {answer}")
-				for child in self.children:
-					child.disabled = True
-				await ctx.edit(view = self) #note to self, do ctx.edit. it works better
-			except:
-				await ctx.respond("Put actual integers")
-				button.disabled = True
-				for child in self.children:
-					child.disabled = True
-				await ctx.edit(view = self)
-			
-		@discord.ui.button(label = "*", style = discord.ButtonStyle.primary)
-		async def third_button_callback(self, button, interaction):
-			try:
-				answer = int(x) * int(y)
-				await interaction.response.send_message(f"{x}*{y} = {answer}")
-				for child in self.children:
-					child.disabled = True
-				await ctx.edit(view = self) #note to self, do ctx.edit. it works better
-			except:
-				await ctx.respond("Put actual integers")
-				button.disabled = True
-				for child in self.children:
-					child.disabled = True
-				await ctx.edit(view = self)
-			
-		@discord.ui.button(label = "/", style = discord.ButtonStyle.primary)
-		async def fourth_button_callback(self, button, interaction):
-			try:
-				answer = int(x) / int(y)
-				await interaction.response.send_message(f"{x}/{y} = {answer}")
-				for child in self.children:
-					child.disabled = True
-				await ctx.edit(view = self) #note to self, do ctx.edit. it works better
-			except:
-				await ctx.respond("Put actual integers")
-				button.disabled = True
-				for child in self.children:
-					child.disabled = True
-				await ctx.edit(view = self)
-
-			
-	await ctx.respond(f"Choose an operation", view = Add() )
 
 
 flaskthing.keep_alive() #initiate hosting! yeeee!
+client.load_extension('cogs.calculator')
+
+
 try:
 	client.run(my_secret)
 except:
