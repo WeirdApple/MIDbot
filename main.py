@@ -125,14 +125,12 @@ async def funfact(ctx):
 	await ctx.respond(embed = embed)
 	print(type(funfact))
 
-@client.bridge_command(description ='test')
-async def test(ctx):
-	await ctx.respond("tjestjdsklfjasdklf")
+
 
 
 
 flaskthing.keep_alive() #initiate hosting! yeeee!
-client.load_extension('cogs.calculator')
+client.load_extension('cogs.calculator',)
 
 
 try:
