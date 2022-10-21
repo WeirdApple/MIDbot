@@ -26,6 +26,7 @@ statuslist = [
     'people arguing for nothing',
     'other bots be more useful than me',
     'the mods go brrrrr',
+	'praying for free bells'
 ]
 
 #changes status
@@ -124,14 +125,37 @@ async def funfact(ctx):
 	embed = discord.Embed(title = "Fun fact!", description = funfact['text'], color = discord.Color.blurple())
 	await ctx.respond(embed = embed)
 	print(type(funfact))
+#ship
+@client.bridge_command(description = "Ship some people but please don't overuse it it gets annoying")
+async def ship(ctx, person1,*, person2):
+	ship1 = person1
+	ship2 = person2
+	await ctx.respond(f"{ship1} and {ship2} has a sucess rate of {random.randint(1,100)}%")
+
+#getting pings
+@client.event
+async def on_message(message):
+	if "<@594972758778314752>" in message.content:
+		await message.reply(f"Mackhoi shall be summoned sooner or later")
+		print(message.channel)
+		channel = client.get_channel(801913674482581504)
+		print(channel.name)
+		await channel.send(f"``{message.author}`` pinged you with the message at ``{message.created_at}``! Message is at https://discord.com/channels/743592753685987328/{message.channel.id}/{message.id} !") 
+		print(message.created_at.strftime("%H:%m, %x"))
+
+
+
 
 
 
 
 
 flaskthing.keep_alive() #initiate hosting! yeeee!
-client.load_extension('cogs.calculator',)
+initial_extensions = ['cogs.calculator', 'cogs.toposymbols']
 
+if __name__ == '__main__':
+    for extension in initial_extensions:
+        client.load_extension(extension)
 
 try:
 	client.run(my_secret)
